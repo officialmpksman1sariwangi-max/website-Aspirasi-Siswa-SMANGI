@@ -159,7 +159,7 @@
     // --- JAVASCRIPT ---
     
     // GANTI URL INI DENGAN URL APPS SCRIPT KAMU
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyLH3nZjnIMYA1RATo3z3P42hawqNYzZ1ZE6Bi1klIr5BFB7Cns9xh_hn6M-pEqe-tjCA/exec';  
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxuJP22pflvPoCltELCBJfvC1Ru6JhHuim3-uq-tuNdW19Wm1U3J2YmOGmBuWvtWsoK_g/exec';  
 
     const form = document.forms['aspirasiForm'];
     const btnKirim = document.getElementById('btnKirim');
@@ -204,5 +204,25 @@
     });
 </script>
 
+</body>
+</html>
+
+<div class="container">
+    <h2>🔍 Cek Status Laporan</h2>
+    <p class="subtitle">Masukkan Kode Tiket untuk melihat respons dari Admin.</p>
+    
+    <div class="form-group">
+        <input type="text" id="inputTiket" placeholder="Contoh: ASP-12345" style="text-transform: uppercase;">
+    </div>
+    <button id="btnCek" class="btn-check">Cek Status</button>
+
+    <div id="hasilCek" class="result-box">
+        <p style="margin-top:0;"><strong>Status:</strong> <span id="lblStatus" style="font-weight: bold; color: #d97706;">-</span></p>
+        <p style="margin-bottom: 0.5rem;"><strong>Balasan Admin:</strong></p>
+        <div id="lblBalasan" class="admin-reply">-</div>
+    </div>
+</div>
+
+<script src="main.js"></script>
 </body>
 </html>
