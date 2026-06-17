@@ -4,225 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kotak Aspirasi Siswa</title>
-    <style>
-        /* --- CSS (Tampilan) --- */
-        :root {
-            --primary-color: #2563eb;
-            --background-color: #f3f4f6;
-            --card-color: #ffffff;
-            --text-color: #1f2937;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            background-color: var(--card-color);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            width: 100%;
-            max-width: 500px;
-        }
-
-        h2 {
-            text-align: center;
-            color: var(--text-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #6b7280;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--text-color);
-        }
-
-        select, textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 1rem;
-            box-sizing: border-box;
-            transition: border-color 0.2s;
-        }
-
-        select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            ring: 2px solid var(--primary-color);
-        }
-
-        textarea {
-            height: 120px;
-            resize: vertical;
-        }
-
-        button {
-            width: 100%;
-            padding: 0.75rem;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        button:hover {
-            background-color: #1d4ed8;
-        }
-
-        button:disabled {
-            background-color: #9ca3af;
-            cursor: not-allowed;
-        }
-
-        /* Loading & Alert Styles */
-        .alert {
-            margin-top: 1rem;
-            padding: 0.75rem;
-            border-radius: 6px;
-            text-align: center;
-            display: none;
-        }
-        .alert-success { background-color: #d1fae5; color: #065f46; }
-        .alert-error { background-color: #fee2e2; color: #991b1b; }
-
-        .anon-badge {
-            display: inline-block;
-            background-color: #e5e7eb;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            color: #4b5563;
-            margin-bottom: 1rem;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-    <h2>🗳️ Kotak Aspirasi Siswa</h2>
-    <p class="subtitle">Sampaikan pendapatmu untuk kemajuan sekolah.</p>
-    
-    <div style="text-align: center;">
-        <span class="anon-badge">🔒 Identitasmu Dijamin Anonim</span>
-    </div>
-
-    <form id="aspirasiForm">
-        <div class="form-group">
-            <label for="kategori">Kategori Aspirasi</label>
-            <select id="kategori" name="kategori" required>
-                <option value="" disabled selected>Pilih Kategori...</option>
-                <option value="Fasilitas Sekolah">Fasilitas Sekolah</option>
-                <option value="Kegiatan Belajar Mengajar">Kegiatan Belajar Mengajar</option>
-                <option value="Ekstrakurikuler">Ekstrakurikuler</option>
-                <option value="Kinerja OSIS MPK">Kinerja OSIS MPK</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="pesan">Pesan / Masukan</label>
-            <textarea id="pesan" name="pesan" placeholder="Tulis aspirasimu di sini dengan bahasa yang sopan..." required></textarea>
-        </div>
-
-        <button type="submit" id="btnKirim">Kirim Aspirasi</button>
-    </form>
-
-    <div id="statusMessage" class="alert"></div>
-</div>
-
-<script>
-    // --- JAVASCRIPT ---
-    
-    // GANTI URL INI DENGAN URL APPS SCRIPT KAMU
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxuJP22pflvPoCltELCBJfvC1Ru6JhHuim3-uq-tuNdW19Wm1U3J2YmOGmBuWvtWsoK_g/exec';  
-
-    const form = document.forms['aspirasiForm'];
-    const btnKirim = document.getElementById('btnKirim');
-    const statusMsg = document.getElementById('statusMessage');
-
-    form.addEventListener('submit', e => {
-        e.preventDefault();
+    <div class="container">
+        <h2>🗳️ Kotak Aspirasi Siswa</h2>
+        <p class="subtitle">Sampaikan pendapatmu untuk kemajuan sekolah.</p>
         
-        // Ubah tombol jadi loading
-        btnKirim.disabled = true;
-        btnKirim.innerHTML = "Sedang Mengirim...";
-        statusMsg.style.display = 'none';
+        <div style="text-align: center;">
+            <span class="anon-badge">🔒 Identitasmu Dijamin Anonim</span>
+        </div>
 
-        // Kirim data ke Google Sheets
-        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(response => {
-                // Tampilkan pesan sukses
-                statusMsg.className = 'alert alert-success';
-                statusMsg.innerHTML = "✅ Terima kasih! Aspirasimu berhasil dikirim.";
-                statusMsg.style.display = 'block';
-                
-                // Reset form dan tombol
-                form.reset();
-                btnKirim.disabled = false;
-                btnKirim.innerHTML = "Kirim Aspirasi";
+        <form id="aspirasiForm">
+            <div class="form-group">
+                <label for="kategori">Kategori Aspirasi</label>
+                <select id="kategori" name="kategori" required>
+                    <option value="" disabled selected>Pilih Kategori...</option>
+                    <option value="Fasilitas Sekolah">Fasilitas Sekolah</option>
+                    <option value="Kegiatan Belajar Mengajar">Kegiatan Belajar Mengajar</option>
+                    <option value="Ekstrakurikuler">Ekstrakurikuler</option>
+                    <option value="Kinerja OSIS MPK">Kinerja OSIS MPK</option>
+                </select>
+            </div>
 
-                // Hilangkan pesan setelah 5 detik
-                setTimeout(() => {
-                    statusMsg.style.display = 'none';
-                }, 5000);
-            })
-            .catch(error => {
-                // Tampilkan pesan error
-                statusMsg.className = 'alert alert-error';
-                statusMsg.innerHTML = "❌ Gagal mengirim. Periksa koneksi internetmu.";
-                statusMsg.style.display = 'block';
-                
-                console.error('Error!', error.message);
-                btnKirim.disabled = false;
-                btnKirim.innerHTML = "Kirim Aspirasi";
-            });
-    });
-</script>
+            <div class="form-group">
+                <label for="pesan">Pesan / Masukan</label>
+                <textarea id="pesan" name="pesan" placeholder="Tulis aspirasimu di sini dengan bahasa yang sopan..." required></textarea>
+            </div>
 
-</body>
-</html>
+            <button type="submit" id="btnKirim">Kirim Aspirasi</button>
+        </form>
 
-<div class="container">
-    <h2>🔍 Cek Status Laporan</h2>
-    <p class="subtitle">Masukkan Kode Tiket untuk melihat respons dari Admin.</p>
-    
-    <div class="form-group">
-        <input type="text" id="inputTiket" placeholder="Contoh: ASP-12345" style="text-transform: uppercase;">
+        <div id="statusMessage" class="alert"></div>
     </div>
-    <button id="btnCek" class="btn-check">Cek Status</button>
 
-    <div id="hasilCek" class="result-box">
-        <p style="margin-top:0;"><strong>Status:</strong> <span id="lblStatus" style="font-weight: bold; color: #d97706;">-</span></p>
-        <p style="margin-bottom: 0.5rem;"><strong>Balasan Admin:</strong></p>
-        <div id="lblBalasan" class="admin-reply">-</div>
+    <div class="container">
+        <h2>🔍 Cek Status Laporan</h2>
+        <p class="subtitle">Masukkan Kode Tiket untuk melihat respons dari Admin.</p>
+        
+        <div class="form-group">
+            <input type="text" id="inputTiket" placeholder="Contoh: ASP-12345" style="text-transform: uppercase;">
+        </div>
+        <button id="btnCek" class="btn-check">Cek Status</button>
+
+        <div id="hasilCek" class="result-box">
+            <p style="margin-top:0;"><strong>Status:</strong> <span id="lblStatus" style="font-weight: bold; color: #d97706;">-</span></p>
+            <p style="margin-bottom: 0.5rem;"><strong>Balasan Admin:</strong></p>
+            <div id="lblBalasan" class="admin-reply">-</div>
+        </div>
     </div>
-</div>
 
-<script src="main.js"></script>
+    <script src="main.js"></script>
+
 </body>
 </html>
